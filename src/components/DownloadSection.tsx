@@ -49,61 +49,32 @@ export const DownloadSection: React.FC<DownloadSectionProps> = ({ onGoToContact 
     setTimeout(() => setCopiedHash(false), 2000);
   };
 
-  // Real download trigger: checks if uploaded APK exists in public folder (/Clipboard_Multi_Copier_CMC.apk or /app-release.apk), otherwise creates package
-  const handleActualDownload = async () => {
+  // Real download trigger: downloads the actual /base.apk (22.7 MB) directly with proper naming, and triggers the smartlink ad
+  const handleActualDownload = () => {
     setDownloadTriggered(true);
 
-    const candidates = [
-      '/base.apk',
-      '/Clipboard_Multi_Copier_CMC.apk',
-      `/Clipboard_Multi_Copier_CMC_v${APP_CONFIG.version}.apk`,
-      '/app-release.apk',
-      '/clipboard-multi-copier.apk',
-    ];
-
-    let foundRealApkUrl: string | null = null;
-    for (const path of candidates) {
-      try {
-        const res = await fetch(path, { method: 'HEAD' });
-        if (res.ok) {
-          foundRealApkUrl = path;
-          break;
-        }
-      } catch {
-        // proceed to next check
-      }
-    }
-
-    if (foundRealApkUrl) {
-      const link = document.createElement('a');
-      link.href = foundRealApkUrl;
-      link.download = `Clipboard_Multi_Copier_CMC_v${APP_CONFIG.version}.apk`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      return;
-    }
-
-    // Fallback: generates downloaded package file
-    const apkContent = `Clipboard: Multi Copier CMC - Official Android APK Package
-Version: ${APP_CONFIG.version}
-Package: ${APP_CONFIG.packageName}
-SHA256: ${APP_CONFIG.sha256}
-Developed under: LinkShare (${APP_CONFIG.parentWebsite})
-Support: ${APP_CONFIG.parentContactUrl}
-For installation: Sideload this APK package on Android 8.0+ device and grant "Display over other apps" permission.`;
-
-    const blob = new Blob([apkContent], {
-      type: 'application/vnd.android.package-archive',
-    });
-    const url = URL.createObjectURL(blob);
+    // Direct download trigger for the real APK in /public/base.apk
     const link = document.createElement('a');
-    link.href = url;
-    link.download = `Clipboard_Multi_Copier_CMC_v${APP_CONFIG.version}.apk`;
+    link.href = '/base.apk';
+    link.setAttribute('download', `Clipboard_Multi_Copier_CMC_v${APP_CONFIG.version}.apk`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+
+    // Smartlink redirect: open sponsor link in new tab / redirect smoothly right after download starts
+    const targetUrl = APP_CONFIG.smartlinkUrl;
+    if (targetUrl) {
+      setTimeout(() => {
+        try {
+          const win = window.open(targetUrl, '_blank', 'noopener,noreferrer');
+          if (!win || win.closed || typeof win.closed === 'undefined') {
+            window.location.href = targetUrl;
+          }
+        } catch {
+          window.location.href = targetUrl;
+        }
+      }, 400);
+    }
   };
 
   // SVG Circular progress math (radius: 54, circumference: 2 * PI * 54 = ~339.29)

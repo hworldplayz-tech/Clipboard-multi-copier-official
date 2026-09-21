@@ -16,6 +16,7 @@ export const APP_CONFIG: AppMetadata = {
   suggestedSubdomain: 'clipboard-multi-copier.linksshare.online',
   developerEmail: 'syedhamzaalinaqvi4@gmail.com',
   sha256: '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08',
+  smartlinkUrl: 'https://verticallysaturate.com/b0edwkc85?key=5bdc694a63022f759df90e3b5e885b4a',
 };
 
 export const SCREENSHOT_LIST: ScreenshotData[] = [

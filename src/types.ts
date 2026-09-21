@@ -16,6 +16,7 @@ export interface AppMetadata {
   suggestedSubdomain: string;
   developerEmail: string;
   sha256: string;
+  smartlinkUrl?: string;
 }
 
 export interface ScreenshotData {
