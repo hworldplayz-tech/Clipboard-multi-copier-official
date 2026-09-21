@@ -19,30 +19,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onSelectTab }) => {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur-md transition-all">
-      {/* Top micro-bar showing official LinkShare domain info */}
-      <div className="border-b border-slate-100 bg-slate-900 px-4 py-1.5 text-xs text-slate-300">
-        <div className="mx-auto flex max-w-6xl items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-            <span>Official Android APK Tool by</span>
-            <a
-              href={APP_CONFIG.parentWebsite}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-amber-300 hover:text-amber-200 transition-colors"
-            >
-              LinkShare (linksshare.online)
-              <ExternalLink className="h-3 w-3" />
-            </a>
-          </div>
-          <div className="hidden sm:flex items-center gap-3 text-slate-400">
-            <span>Domain: <code className="text-amber-300/90 font-mono text-[11px]">{APP_CONFIG.suggestedSubdomain}</code></span>
-            <span>•</span>
-            <span>v{APP_CONFIG.version} Stable</span>
-          </div>
-        </div>
-      </div>
-
       {/* Main navigation bar */}
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
         {/* Brand logo & title */}
