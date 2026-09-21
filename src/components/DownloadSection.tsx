@@ -54,6 +54,7 @@ export const DownloadSection: React.FC<DownloadSectionProps> = ({ onGoToContact 
     setDownloadTriggered(true);
 
     const candidates = [
+      '/base.apk',
       '/Clipboard_Multi_Copier_CMC.apk',
       `/Clipboard_Multi_Copier_CMC_v${APP_CONFIG.version}.apk`,
       '/app-release.apk',
