@@ -1,0 +1,6 @@
+{
+  "name": "Clipboard: Multi Copier CMC",
+  "description": "Official website and download portal for Clipboard: Multi Copier CMC Android APK by LinkShare. Features 3D launcher, floating side dock, and multi-item clipboard management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
